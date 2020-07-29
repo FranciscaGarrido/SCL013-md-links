@@ -17,7 +17,7 @@ fs.readFile('README.md', 'utf-8', (error, data) => {
 }); */
 
 
-//AQUI SE MUESTRAN TODOS LOS ARCHIVOS MD (intentar mostrar txt igual)
+//AQUÍ SE MUESTRAN TODOS LOS ARCHIVOS MD (intentar mostrar txt igual)
  
 fs.readdir('./', (error, files) => {
 
@@ -35,16 +35,16 @@ fs.readdir('./', (error, files) => {
   
 });   
 
-//AQUI SE INTENTA LEER LOS ARCHIVOS
+//AQUÍ SE INTENTA LEER LOS ARCHIVOS
 
-fs.readFile('file', 'utf-8', (error, data) => {
+fs.readFile('files', 'utf-8', (error, data) => {
   if(error) {
     console.log('error: ', error);
   } else {
     console.log(data);
   }
 }); 
- 
+
 
 
 
