@@ -28,6 +28,13 @@ fs.readdir('./', (error, files) => {
     files.forEach(file => {
       if(path.extname(file) === ".md"){
         console.log("Estos son los archivos de extensión md: ", file);
+        fs.readFile(file, 'utf-8', (error, data) => {
+          if(error) {
+            console.log('error: ', error);
+          } else {
+            console.log(data);
+          }
+        }); 
       }
     }) 
   }
@@ -37,13 +44,13 @@ fs.readdir('./', (error, files) => {
 
 //AQUI SE INTENTA LEER LOS ARCHIVOS
 
-fs.readFile('file', 'utf-8', (error, data) => {
-  if(error) {
-    console.log('error: ', error);
-  } else {
-    console.log(data);
-  }
-}); 
+// fs.readFile('file', 'utf-8', (error, data) => {
+//   if(error) {
+//     console.log('error: ', error);
+//   } else {
+//     console.log(data);
+//   }
+// }); 
  
 
 
