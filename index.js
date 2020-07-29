@@ -3,7 +3,8 @@
 // };
 
 const fs = require("fs");
-const path = require('path');   
+const path = require('path');  
+const marked = require("marked"); 
 
 //AQUÍ SE LEEN LOS ARCHIVOS, EN ESTE CASO README (lee el archivo que se le indique)
 
@@ -32,25 +33,27 @@ fs.readdir('./', (error, files) => {
           if(error) {
             console.log('error: ', error);
           } else {
-            console.log(data);
+            const links = [];
+            const renderer = new marked.Renderer();
+            renderer.link  = (href, text, file) => {
+              links.push({
+                href:href,
+                text:text,
+                file:file
+              })
+            }
+            marked(data, { renderer : renderer });
+            //links = httpLinks(links);
+            console.log(links)
           }
         }); 
       }
     }) 
   }
-
-  
 });   
 
-//AQUÍ SE INTENTA LEER LOS ARCHIVOS
 
-// fs.readFile('file', 'utf-8', (error, data) => {
-//   if(error) {
-//     console.log('error: ', error);
-//   } else {
-//     console.log(data);
-//   }
-// }); 
+
  
 
 
