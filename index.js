@@ -5,8 +5,9 @@
 const fs = require("fs");
 const path = require('path');  
 const marked = require("marked"); 
+const chalk = require('chalk');
 
-//AQUÍ SE LEEN LOS ARCHIVOS, EN ESTE CASO README (lee el archivo que se le indique)
+//AQUÍ SE LEEN LOS ARCHIVOS, EN ESTE CASO, "README" (lee el archivo que se le indique)
 
 /* let fs = require('fs');
 fs.readFile('README.md', 'utf-8', (error, data) => {
@@ -18,17 +19,18 @@ fs.readFile('README.md', 'utf-8', (error, data) => {
 }); */
 
 
-//AQUÍ SE MUESTRAN TODOS LOS ARCHIVOS MD (intentar mostrar txt igual)
+//AQUÍ SE MUESTRAN TODOS LOS ARCHIVOS MD 
  
 fs.readdir('./', (error, files) => {
 
   if(error){
     throw error;
+    console.log(chalk.red("No existen archivos .md en este directorio"));
   }
   else{
     files.forEach(file => {
       if(path.extname(file) === ".md"){
-        console.log("Estos son los archivos de extensión md: ", file);
+        console.log(chalk.green("Archivo con extensión md: ") + chalk.yellow (file));
         fs.readFile(file, 'utf-8', (error, data) => {
           if(error) {
             console.log('error: ', error);
@@ -38,19 +40,20 @@ fs.readdir('./', (error, files) => {
             renderer.link  = (href, text, file) => {
               links.push({
                 href:href,
-                text:text,
-                file:file
+                //text:text,
+                tittle:file
               })
             }
             marked(data, { renderer : renderer });
-            //links = httpLinks(links);
-            console.log(links)
+            //httpLinks(links);
+            console.log("Links que contiene cada archivo: ",  links)
           }
         }); 
       }
     }) 
   }
 });   
+
 
 
 
