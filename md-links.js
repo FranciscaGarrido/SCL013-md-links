@@ -3,7 +3,8 @@ const path = require('path');
 const marked = require("marked"); 
 const chalk = require('chalk');
 const { clearScreenDown } = require("readline");
-
+const fetchUrl = require("fetch").fetchUrl;
+const links = [];
 
 // Leyendo archivos .md
 fs.readdir('./', (error, files) => {
@@ -29,7 +30,6 @@ const readingLinks = (file, path) =>{
         if(error) {
           console.log('error: ', error);
         } else {
-          const links = [];
           const renderer = new marked.Renderer();
           renderer.link  = (href, file, title) => {
             links.push({
@@ -41,10 +41,22 @@ const readingLinks = (file, path) =>{
 
           marked(data, { renderer : renderer });
           //httpLinks(links);
-            console.log(chalk.greenBright.bold("Links que contiene el archivo: "), httpLinks(links));
+          //console.log(chalk.greenBright.bold("Links que contiene el archivo: "), httpLinks(links));
+            /* Promise.all(links.map(link => httpStatus(link.href)))
+            .then(resAll => {
+              resAll.forEach( (res , index) => 
+                console.log("El estado del link: ", links[index] , "es:",  res)
+                )   
+            })
+            .catch(err => {
+              console.log("No podemos verificar el estado");
+            } )*/
+
             console.log(totalLinks(links));
-        }
-      }); 
+ 
+          }
+          
+      });
 }
 
 // Función que filtra por prefijo http
@@ -57,6 +69,7 @@ const httpLinks = (links) =>{
     }
   })
   return httpLinks;
+  
 };
 
 
@@ -75,3 +88,29 @@ const totalLinks = (links) => {
       chalk.yellowBright(uniqueLinks.size)
     );
   }
+
+//Funcion que muestra el estado de los links
+const httpStatus = (url) => {
+  return new Promise ((resolve, reject) => {
+    fetchUrl(url, (error, meta, body) => {
+      if(error){
+        reject(error);
+      }
+      else{
+        resolve(meta.status);
+      }
+    });
+  });
+}
+
+
+/* let url = httpLinks;
+httpStatus(url)
+  .then(res => {
+    console.log("El estado del link: ", url , "es:",  res)
+  })
+  .catch(err => {
+    console.log(err)
+  }); */
+
+
