@@ -34,7 +34,7 @@ const readingLinks = (file, path) =>{
 
           const links = [];
           const renderer = new marked.Renderer();
-          renderer.link  = (href, file, text) => {
+          renderer.link  = (href, file2, text) => {
             links.push({
               href:href,
               text:text,
@@ -45,9 +45,9 @@ const readingLinks = (file, path) =>{
           
           const urlLinks = links.filter(element=> element.href.includes('http'));
           
-          console.log(totalLinks(urlLinks));
-          //console.log(validateLinks(urlLinks));
-          console.log(totalBrokenLinks(links));     
+          totalLinks(urlLinks);
+          validateLinks(urlLinks);
+         totalBrokenLinks(links);     
           }   
       });
 }
