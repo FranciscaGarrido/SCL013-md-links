@@ -6,10 +6,9 @@ const { clearScreenDown } = require("readline");
 const fetchUrl = require("fetch").fetchUrl;
 const nodeFetch = require('node-fetch');
 
-
 // Leyendo archivos .md
-fs.readdir('./', (error, files) => {
 
+fs.readdir('./', (error, files) => {
     if(error){
       throw error;
       console.log(chalk.red("No existen archivos .md en este directorio"));
@@ -17,15 +16,16 @@ fs.readdir('./', (error, files) => {
     else{
       files.forEach(file => {
         if(path.extname(file) === ".md"){
-          console.log(chalk.blue.bold("Analizando archivo: ") + chalk.blue(file));
+          console.log(chalk.blue.bold("Analizando archivo: ", file));
+          console.log("____________________________________")
           readingLinks(file, path);
         }
       }) 
     }
   }); 
 
-
 // Función que extrae links y los imprime
+
 const readingLinks = (file, path) =>{
     fs.readFile(file, 'utf-8', (error, data) => {
         if(error) {
@@ -41,19 +41,34 @@ const readingLinks = (file, path) =>{
               file:file
             })
           }
+
           marked(data, { renderer : renderer });
+          const urlLinks = links.filter(element => element.href.includes('http'));
           
-          const urlLinks = links.filter(element=> element.href.includes('http'));
-          
-          totalLinks(urlLinks);
-          validateLinks(urlLinks);
-         totalBrokenLinks(links);     
+// OPCIONES
+
+          let argv2 = process.argv[2];
+          let argv3 = process.argv[3];
+          if(argv2 == '-v' && argv3 == '-s' || argv3== '-v' && argv2 == '-s'){
+              totalLinks(urlLinks);
+              totalBrokenLinks(links);
+              validateLinks(urlLinks);
+            }else if (argv2 == '-s' || argv2  == '-stats'){
+              totalBrokenLinks(links);
+              totalLinks(urlLinks);
+            }else if (argv2 == '-v' || argv2 == '-validate'){
+              validateLinks(urlLinks);
+            }else{
+              console.log("Links que contiene su archivo: ");
+              linksFile(urlLinks);
+            }
+
           }   
       });
 }
 
-
 // Función que suma el total de links y links únicos
+
 const totalLinks = (links) => {
     let numLinks = [];
   
@@ -69,8 +84,8 @@ const totalLinks = (links) => {
     );
   }
 
-
 //Función que calcula total de links rotos
+
 const totalBrokenLinks = (links) => {
   const linksUrl = links.map((link) => link.href);
   let brokenLinks;
@@ -93,16 +108,16 @@ const totalBrokenLinks = (links) => {
   });
 }
 
-
 //Función para validar el estatus del link
+
 const validateLinks = (links) => {
   links.map(element => {
     nodeFetch(element.href)
       .then(resp => {
         if (resp.status === 200) {
-          console.log(chalk.greenBright('[✔]', chalk.blue.bold('status:'), `${resp.status}`, chalk.blue.bold('href:'), `${element.href}`, chalk.blue.bold('text:'), `${element.text}`, chalk.blue.bold('file:'), `${element.file}`))
+          console.log(chalk.greenBright('[✔]', chalk.blue.bold('status:'), `${resp.status}`, chalk.blue.bold('href:'), `${element.href}`, chalk.blue.bold('text:'), `${element.text}`, chalk.blue.bold('file:'), `${element.file}`),'٩(^‿^)۶')
         } else if (resp.status === 404) {
-          console.log(chalk.redBright('[X]', chalk.blue.gray.bold('status:'), `${resp.status}`, chalk.gray.bold('href:'), `${element.href}`, chalk.gray.bold('text:'), `${element.text}`, chalk.gray.bold('file:'), `${element.file}`))
+          console.log(chalk.redBright('[X]', chalk.blue.gray.bold('status:'), `${resp.status}`, chalk.gray.bold('href:'), `${element.href}`, chalk.gray.bold('text:'), `${element.text}`, chalk.gray.bold('file:'), `${element.file}`),'(╥﹏╥)')
         }
 
       })
@@ -111,3 +126,15 @@ const validateLinks = (links) => {
       })
   })
 };
+
+
+//Mostrar solo los links del archivo
+const linksFile = (urlLinks) => {
+  urlLinks.map ((item) => {
+    console.log(chalk.blue.bold("Link: "), item.href);
+    console.log(chalk.blue.bold("Título: "), item.text);
+    console.log(chalk.blue.bold("Archivo: "), item.file);
+    console.log(chalk.yellow.bold("--------------------------------------------"))
+  })
+} 
+
