@@ -17,7 +17,7 @@ fs.readdir('./', (error, files) => {
       files.forEach(file => {
         if(path.extname(file) === ".md"){
           console.log(chalk.blue.bold("Analizando archivo: ", file));
-          console.log("____________________________________")
+          console.log("--------------------------------------------------")
           readingLinks(file, path);
         }
       }) 
@@ -60,6 +60,7 @@ const readingLinks = (file, path) =>{
               validateLinks(urlLinks);
             }else{
               console.log("Links que contiene su archivo: ");
+              console.log("--------------------------------------------------")
               linksFile(urlLinks);
             }
 
@@ -134,7 +135,7 @@ const linksFile = (urlLinks) => {
     console.log(chalk.blue.bold("Link: "), item.href);
     console.log(chalk.blue.bold("Título: "), item.text);
     console.log(chalk.blue.bold("Archivo: "), item.file);
-    console.log(chalk.yellow.bold("--------------------------------------------"))
+    console.log(chalk.yellow.bold("--------------------------------------------------"))
   })
 } 
 
