@@ -8,7 +8,10 @@
     "node-fetch": "^2.6.0",
     "readdir": "^1.0.2"
   },
+<<<<<<< HEAD
   "description": "Markdown Links es una librería que permite al usuario recorrer un directorio en busca de archivos con extensión .md (archivos markdown) y analizar el estado de los enlaces presentes en cada archivo verificando si estos se encuentran funcionales o rotos. El resultado se visualiza en la terminal.",
+=======
+>>>>>>> 69ec82b71a6e7bbd9fc14b38ef740c2256953c84
   "main": "index.js",
   "directories": {
     "test": "test"
@@ -19,6 +22,7 @@
   },
   "repository": {
     "type": "git",
+<<<<<<< HEAD
     "url": "git+https://github.com/FranciscaGarrido/SCL013-md-links.git"
   },
   "author": "",
@@ -27,4 +31,15 @@
     "url": "https://github.com/FranciscaGarrido/SCL013-md-links/issues"
   },
   "homepage": "https://github.com/FranciscaGarrido/SCL013-md-links#readme"
+=======
+    "url": "git+https://github.com/pamelanancupil/SCL013-md-links.git"
+  },
+  "author": "Francisca Garrido y Pamela Ñancupil",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pamelanancupil/SCL013-md-links/issues"
+  },
+  "homepage": "https://github.com/pamelanancupil/SCL013-md-links#readme",
+  "description": ""
+>>>>>>> 69ec82b71a6e7bbd9fc14b38ef740c2256953c84
 }

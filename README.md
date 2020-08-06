@@ -1,9 +1,9 @@
-# Markdown Links
+# Md Links
 
 
-## 1. Librería Markdown Links
+## 1. Librería Md Links
 
-Markdown Links es una librería que permite al usuario recorrer un directorio en busca de archivos con extensión .md (archivos markdown) y analizar el estado de los enlaces presentes en cada archivo verificando si estos se encuentran funcionales o rotos. El resultado se visualiza en la terminal.
+Md Links es una librería que permite al usuario analizar archivos con extensión .md (archivos markdown) para conocer el estado de los enlaces presentes en cada archivo verificando si estos se encuentran funcionales o dañados. El resultado se visualiza en la terminal.
 
 ![Mardown Links](https://i.ibb.co/GcKcJPG/Markdown-links.png)
 
@@ -16,24 +16,42 @@ Markdown Links es una librería que permite al usuario recorrer un directorio en
 ### Instalación
 * Instalar previamente npm y Node.js en tu computador.
 
-* Ejecuta el siguiente comando en la terminal de tu archivo.
+* Ejecuta el siguiente comando en la terminal.
 ```js
-$ npm i 
+$ npm install pamelanancupil/SCL013-md-links 
 ```
 
 ### Uso
+
 * Para hacer uso de la librería ejecuta el siguiente comando en la terminal de tu archivo.
 ```js
-$ node md-links 
+$ node tuarchivo.js tuarchivo.md
 ```
 * Para ver el total de links y total de links únicos ejecuta el siguiente comando en la terminal.
 ```js
-$ --validate o -v
+$ node tuarchivo.js tuarchivo.md -validate o node tuarchivo.js tuarchivo.md -v
 ```
 * Para ver el estado de tus links ejecuta el siguiente comando en la terminal.
 ```js
-$ --stats o -s
+$ node tuarchivo.js tuarchivo.md -stats o node tuarchivo.js tuarchivo.md -s
+```
+* Para ver estadísticas de tus links ejecuta el siguiente comando en la terminal.
+```js
+$ node tuarchivo.js tuarchivo.md -s -v
 ```
 
 ### Resultados
+* Si pasamos la opción -validate o -v, el módulo debe hacer una petición HTTP para averiguar si el link funciona o no. Si el link resulta en una redirección a una URL que responde ok, entonces consideraremos el link como ok.
+
+![Validate](https://i.ibb.co/qRRzCwQ/v.jpg)
+
+Vemos que el output en este caso incluye el símbolo ok o fail, así como el status de la respuesta recibida a la petición HTTP a dicha URL.
+
+* Si pasamos la opción -stats o -s el output (salida) será un texto con estadísticas básicas sobre los links.
+
+![Stats](https://i.ibb.co/nzbwdTP/s.jpg)
+
+* También podemos combinar -stats y -validate o -s y -v para obtener estadísticas que necesiten de los resultados de la validación.
+
+![validate y stats](https://i.ibb.co/JFzD6tG/s-v.jpg)
 
