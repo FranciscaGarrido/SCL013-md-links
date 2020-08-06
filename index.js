@@ -53,7 +53,7 @@ const readingLinks = () =>{
           }
 
           marked(data, { renderer : renderer });
-          const urlLinks = links.filter(element => element.href.includes('http')); */
+          const urlLinks = links.filter(element => element.href.includes('http')); 
           
 // Opciones
 
