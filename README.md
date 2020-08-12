@@ -5,7 +5,7 @@
 
 Md Links es una librería que permite al usuario analizar archivos con extensión .md (archivos markdown) para conocer el estado de los enlaces presentes en cada archivo verificando si estos se encuentran funcionales o dañados. El resultado se visualiza en la terminal.
 
-![Mardown Links](https://i.ibb.co/GcKcJPG/Markdown-links.png)
+![Mardown Links](https://i.ibb.co/TrQWY3c/Markdown-links-1.png)
 
 ## 2. Diagrama de flujo
 
